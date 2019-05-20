@@ -17,7 +17,22 @@ export const getBasket = userId => {
 
 export const addItemBasket = (userId, product, quantity) => {
   const basket = getBasket(userId)
-  addNewItemToBasket(userId, basket, quantity, product)
+  const index = findProductInBasket(basket, product.id)
+
+  index < 0
+    ? addNewItemToBasket(userId, basket, quantity, product)
+    : updateItemQuantity(userId, basket, quantity, index)
+}
+
+const findProductInBasket = (basket, id) => {
+  return basket.items.findIndex(item => item.id === id)
+}
+
+const updateItemQuantity = (userId, basket, quantity, index) => {
+  const items = basket.items.slice(0)
+  items[index] = { ...items[index], quantity: items[index].quantity + quantity }
+  const newBasket = { ...basket, items }
+  save(userId, newBasket)
 }
 
 const addNewItemToBasket = (userId, basket, quantity, product) => {

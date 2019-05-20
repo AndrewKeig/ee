@@ -31,4 +31,32 @@ describe('Given An empty shopping cart', () => {
       expect(total).toEqual(199.95)
     })
   })
+
+  describe('When the user adds 5 Dove Soaps, and another 3 Dove Soaps to the shopping cart', () => {
+    const userId = 1
+    let basket
+
+    beforeAll(() => {
+      clearBasket()
+      const product = getProduct(1)
+      addItemBasket(userId, product, 5)
+      addItemBasket(userId, product, 3)
+      basket = getBasket(userId)
+    })
+
+    it('Then the shopping cart should contain 8 Dove Soaps each with a unit price of 39.99', () => {
+      const basket = getBasket(userId)
+      const expoected = {
+        userId,
+        items: [{ id: 1, price: 39.99, name: 'Dove Soap', quantity: 8 }]
+      }
+
+      expect(basket).toEqual(expoected)
+    })
+
+    it('Then the shopping carts total price should equal 319.92', () => {
+      const total = getBasketTotal(basket)
+      expect(total).toEqual(319.92)
+    })
+  })
 })
