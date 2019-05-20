@@ -1,5 +1,18 @@
 # Shopping Cart
 
+This solution, uses a mocked nosql datastore, a basket is simply respresented like so:
+
+```
+[
+  {
+    userId: 1,
+    items: [
+      { id: 1, price: 39.99, name: 'Dove Soap', quantity: 2 }
+    ]
+  }
+]
+```
+
 This repository contains 3 branches:
 
 * step-1: Add products to the shopping cart.
