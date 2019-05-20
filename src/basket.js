@@ -1,5 +1,12 @@
 let baskets = []
 
+export const getGrandTotal = (total, tax) => total + tax
+
+export const getSalesTax = total => {
+  const salesTaxRate = 0.125
+  return round(total * salesTaxRate, 2)
+}
+
 export const clearBasket = () => (baskets = [])
 
 export const getBasketTotal = basket => {
